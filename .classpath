@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="driversDatabase/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="postgresql-42.1.4.jar"/>
+</classpath>

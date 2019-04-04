@@ -25,9 +25,9 @@ public class ProvedorConexao {
         //String url = "jdbc:postgresql://localhost:5432/ifrn";
 
 		String driver = "com.mysql.cj.jdbc.Driver";
-        String user = "root";
-        String senha = "rootadmin";
-		String url = "jdbc:mysql://localhost:3306/ifrn_db";
+        String user = "jeje";
+        String senha = "";
+		String url = "jdbc:mysql://127.0.0.1:3306/campeonato";
 
 
 			try {
