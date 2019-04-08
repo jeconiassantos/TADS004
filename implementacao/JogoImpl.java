@@ -35,14 +35,14 @@ public class JogoImpl implements JogoDAO {
 			String insertTableSQL = "INSERT INTO jogo"
 					+ "(cod, resultado, timea_cod, timeb_cod) VALUES"
 					+ "(?,?,?,?)";
-				
+
 				preparedStatement = conn.prepareStatement(insertTableSQL);
-				preparedStatement.setString(1, "" + jogo.getCod());
+				preparedStatement.setInt(1, jogo.getCod());
 				preparedStatement.setString(2, jogo.getResultado());
-                preparedStatement.setString(3, "" + jogo.getTimea());
-                preparedStatement.setString(4, "" + jogo.getTimeb());
+                preparedStatement.setInt(3, jogo.getTimea());
+                preparedStatement.setInt(4, jogo.getTimeb());
 				int resultado = preparedStatement.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

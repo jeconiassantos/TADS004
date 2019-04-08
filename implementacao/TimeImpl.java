@@ -35,13 +35,13 @@ public class TimeImpl implements TimeDAO{
 			String insertTableSQL = "INSERT INTO time"
 					+ "(cod, nome, data_fundacao) VALUES"
 					+ "(?,?,?)";
-				
+
 				preparedStatement = conn.prepareStatement(insertTableSQL);
-				preparedStatement.setString(1, "" + time.getCod());
+				preparedStatement.setInt(1, time.getCod());
 				preparedStatement.setString(2, time.getNome());
 				preparedStatement.setString(3, time.getDatafundacao());
 				int resultado = preparedStatement.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
