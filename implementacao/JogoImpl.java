@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.List;
+import java.util.ArrayList;
 
 import dao.JogoDAO;
 import campeonato.Jogo;
@@ -12,10 +15,35 @@ import conn.ProvedorConexao;
 
 public class JogoImpl implements JogoDAO {
 
+	private PreparedStatement preparedStatement;
+	private Statement stm;
+	private Connection conn;
+
     @Override
 	public List<Jogo> listarTodosJogos() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Jogo> jogos = new ArrayList<>();
+
+		try {
+			this.conn = ProvedorConexao.getConnection();
+			String insertTableSQL = "SELECT * FROM jogo";
+			this.preparedStatement = this.conn.prepareStatement(insertTableSQL);
+
+			ResultSet resultado = this.preparedStatement.executeQuery(insertTableSQL);
+			//ResultSetMetaData rsmd = resultado.getMetaData();
+
+			//int columnsNumber = rsmd.getColumnCount();
+			while (resultado.next()) {
+				Jogo jogo = new Jogo(resultado.getInt(1), resultado.getString(2), resultado.getInt(3), resultado.getInt(4));
+				jogos.add(jogo);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return jogos;
 	}
 
 	@Override

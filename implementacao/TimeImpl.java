@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.List;
+import java.util.ArrayList;
 
 import dao.TimeDAO;
 import campeonato.Time;
@@ -12,10 +15,35 @@ import conn.ProvedorConexao;
 
 public class TimeImpl implements TimeDAO{
 
+	private PreparedStatement preparedStatement;
+	private Statement stm;
+	private Connection conn;
+
 	@Override
 	public List<Time> listarTodosTimes() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Time> times = new ArrayList<>();
+
+		try {
+			this.conn = ProvedorConexao.getConnection();
+			String insertTableSQL = "SELECT * FROM time";
+			this.preparedStatement = this.conn.prepareStatement(insertTableSQL);
+
+			ResultSet resultado = this.preparedStatement.executeQuery(insertTableSQL);
+			//ResultSetMetaData rsmd = resultado.getMetaData();
+
+			//int columnsNumber = rsmd.getColumnCount();
+			while (resultado.next()) {
+				Time time = new Time(resultado.getInt(1), resultado.getString(2), resultado.getString(3));
+				times.add(time);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return times;
 	}
 
 	@Override
